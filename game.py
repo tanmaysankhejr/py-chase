@@ -17,6 +17,7 @@ green = (0,255,0)
 blue = (0,0,255)
 seconds = 1
 
+pygame.time.get_ticks()/1000
 
 tom = pygame.image.load('Images/tom.png')
 jerry = pygame.image.load('Images/jerry.png')
@@ -76,7 +77,7 @@ def button(msg,x,y,w,h,c,action=None):
 
 def timer(count):
 	font = pygame.font.SysFont(None,25)
-	text = font.render("Time:" + str(count),True,red)
+	text = font.render("Time:" + str(pygame.time.get_ticks()/1000),True,red)
 	gameDisplay.blit(text,(0,0))
 
 
@@ -112,7 +113,7 @@ def game_intro():
 		textRect = text.get_rect()
 		textRect1 = text.get_rect()
 		textRect.center = ((display_width/2),(display_height/2))
-		textRect1.center = ((display_width/2)+220,(display_height/2)+50)
+		textRect1.center = ((display_width/2)+10,(display_height/2)+50)
 		gameDisplay.blit(text, textRect)
 		gameDisplay.blit(text1, textRect1)
 
@@ -172,7 +173,7 @@ def gameLoop():
 		for event in pygame.event.get():
 			if(event.type == pygame.QUIT):
 				pygame.quit()
-				t.stop()
+				# t.stop()
 				quit()
 
 			if event.type == pygame.KEYDOWN:
