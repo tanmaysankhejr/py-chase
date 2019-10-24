@@ -4,7 +4,7 @@ from threading import Thread
 
 pygame.init()
 
-#variables 
+#variables
 
 display_width =800
 display_height =600
@@ -43,7 +43,7 @@ def jerrywins():
 
 
 def button(msg,x,y,w,h,c,action=None):
-		
+
 	pygame.draw.rect(gameDisplay,c,(x,y,w,h))
 	# pygame.draw.rect(gameDisplay,green,(250,450,100,50))
 	# pygame.draw.rect(gameDisplay,red,(450,450,100,50))
@@ -57,7 +57,7 @@ def button(msg,x,y,w,h,c,action=None):
 			pygame.draw.rect(gameDisplay,blue,(x,y,w,h))
 			if click[0] == 1:
 				if action == 'play':
-					
+
 					gameLoop()
 
 				if action == 'quit':
@@ -65,13 +65,13 @@ def button(msg,x,y,w,h,c,action=None):
 					quit()
 
 	# if (450 < mouse[0] < 550 and 450 < mouse[1] < 500):
-	# 	pygame.draw.rect(gameDisplay,blue,(450,450,100,50))					
+	# 	pygame.draw.rect(gameDisplay,blue,(450,450,100,50))
 
 	smallText = pygame.font.Font('freesansbold.ttf',20)
 
 	TextSurf, TextRect = text_objects(msg, smallText)
 	TextRect.center = ((x+50,y+28))
-	gameDisplay.blit(TextSurf, TextRect)		
+	gameDisplay.blit(TextSurf, TextRect)
 
 
 def timer(count):
@@ -100,10 +100,22 @@ def game_intro():
 		gameDisplay.fill(white)
 		largeText = pygame.font.Font('freesansbold.ttf',115)
 		TextSurf, TextRect = text_objects("The Chase", largeText)
-		TextRect.center = ((display_width/2),(display_height/2))
+		TextRect.center = ((display_width/2),(display_height/2)-100)
+		# TextInst = text_objects("Control Tom using 'W,A,S,D keys and Jerry using UP, DOWN, LEFT, RIGHT keys'", largeText)
 		gameDisplay.blit(TextSurf, TextRect)
-		
-		
+
+
+		# display_surface = pygame.display.set_mode((X, Y ))
+		font = pygame.font.Font('freesansbold.ttf', 20)
+		text = font.render("Control Tom using 'W,A,S,D keys and Jerry using UP, DOWN, LEFT, RIGHT keys'", True, blue, white)
+		text1 = font.render("Game Over when Tom catches Jerry", True, blue, white)
+		textRect = text.get_rect()
+		textRect1 = text.get_rect()
+		textRect.center = ((display_width/2),(display_height/2))
+		textRect1.center = ((display_width/2)+220,(display_height/2)+50)
+		gameDisplay.blit(text, textRect)
+		gameDisplay.blit(text1, textRect1)
+
 		#button(msg,x,y,w,h,c):
 		button("Start",250,450,100,50,green,'play')
 		button("Exit",450,450,100,50,red,'quit')
@@ -186,7 +198,7 @@ def gameLoop():
 					y_changeB =- 5
 
 				if event.key == pygame.K_s:
-					y_changeB =+ 5	
+					y_changeB =+ 5
 
 
 			if event.type == pygame.KEYUP:
@@ -203,20 +215,20 @@ def gameLoop():
 		x1 += x_changeB
 		y1 += y_changeB
 
-		
+
 		if( x1 < x < x1+object_size or x1 < x+object_size < x1+object_size):
 			if(y1 < y < y1+object_size or y1 < y+object_size < y1+object_size):
 				#print("crash",i)
 				#i+=1
-				
+
 				tomwins()
 
 		if (x < 5 or x+object_size > 795 or y < 20 or y+object_size > 595):
-			jerrywins()		
+			jerrywins()
 
 
 		if (x1 < 5 or x1+object_size > 795 or y1 < 20 or y1+object_size > 595):
-			tomwins()		
+			tomwins()
 
 
 		if(seconds > 10000):
