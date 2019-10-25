@@ -113,7 +113,7 @@ def game_intro():
 		textRect = text.get_rect()
 		textRect1 = text.get_rect()
 		textRect.center = ((display_width/2),(display_height/2))
-		textRect1.center = ((display_width/2)+10,(display_height/2)+50)
+		textRect1.center = ((display_width/2)+220,(display_height/2)+50)
 		gameDisplay.blit(text, textRect)
 		gameDisplay.blit(text1, textRect1)
 
